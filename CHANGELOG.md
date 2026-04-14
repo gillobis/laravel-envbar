@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.1.2] - 2026-04-14
+
+### Fixed
+- fix incorrect body margin when bar is visible (32px -> 24px)
+- fix service provider boot method to ensure middleware is registered after all providers are loaded
+
 ## [0.1.1] - 2026-04-14
 
 ### Added
