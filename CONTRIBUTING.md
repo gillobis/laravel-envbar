@@ -1,4 +1,4 @@
-# How to Contribute to laravel-env-bar
+# How to Contribute to laravel-envbar
 
 Thank you for wanting to contribute! Please read these guidelines before opening a PR.
 
@@ -35,10 +35,10 @@ Use the format:
 
 > type(scope): short description in English
 > 
-> feat(middleware): add support for AJAX requests
-> fix(config): fix default value for position
-> docs(readme): add switcher example
-> chore(ci): update PHP 8.3 matrix
+> feat(middleware): add support for AJAX requests 
+> fix(config): fix default value for position 
+> docs(readme): add switcher example 
+> chore(ci): update PHP 8.3 matrix 
 
 ## Breaking changes
 

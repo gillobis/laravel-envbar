@@ -123,7 +123,7 @@ return [
     | Laravel Gate or null for no control (shows to everyone)
     */
     'gate' => null,
-    // Example: 'gate' => 'viewEnvBar'
+    // Example: 'gate' => 'viewEnvbar'
 
     /*
     |--------------------------------------------------------------------------
