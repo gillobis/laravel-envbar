@@ -1,0 +1,34 @@
+{
+    "name": "gillobis/laravel-envbar",
+    "description": "Visual environment indicator bar for Laravel",
+    "type": "library",
+    "license": "MIT",
+    "require": {
+        "php": "^8.1",
+        "illuminate/support": "^10.0|^11.0|^12.0|^13.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^8.0|^9.0|^10.0",
+        "pestphp/pest": "^2.0|^3.0",
+        "pestphp/pest-plugin-laravel": "^2.0|^3.0",
+        "larastan/larastan": "^2.0",
+        "laravel/pint": "^1.0"
+    },
+    "autoload": {
+        "psr-4": { "Gillobis\\Envbar\\": "src/" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Gillobis\\Envbar\\Tests\\": "tests/" }
+    },
+    "extra": {
+        "laravel": {
+            "providers": ["Gillobis\\Envbar\\EnvbarServiceProvider"],
+            "aliases": { "Envbar": "Gillobis\\Envbar\\Facades\\Envbar" }
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    }
+}

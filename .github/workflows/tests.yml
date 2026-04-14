@@ -1,0 +1,43 @@
+name: Tests
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php: [8.1, 8.2, 8.3]
+        laravel: [10.*, 11.*, 12.*, 13.*]
+        exclude:
+          - php: 8.1
+            laravel: 12.*  # Laravel 12 richiede PHP 8.2+
+          - php: 8.1
+            laravel: 13.*  # Laravel 13 richiede PHP 8.2+
+
+    name: PHP ${{ matrix.php }} – Laravel ${{ matrix.laravel }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: none
+
+      - name: Install dependencies
+        run: |
+          composer require "laravel/framework:${{ matrix.laravel }}" \
+            "orchestra/testbench:^8|^9|^10" --no-update
+          composer install --prefer-dist --no-progress
+
+      - name: Run tests
+        run: ./vendor/bin/pest
+
+      - name: Run Pint (code style check)
+        run: ./vendor/bin/pint --test
+
+      - name: Run Larastan
+        run: ./vendor/bin/phpstan analyse src --level=6
