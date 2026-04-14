@@ -27,16 +27,29 @@ jobs:
 
       - name: Install dependencies
         run: |
-          rm -f composer.lock
           composer require "laravel/framework:${{ matrix.laravel }}" \
             "orchestra/testbench:^8|^9|^10|^11" --no-update
-          composer update --prefer-dist --no-progress
+          composer install --prefer-dist --no-progress
 
       - name: Run tests
         run: ./vendor/bin/pest --no-coverage
+  
+  pint:
+    name: Code style (Pint)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with: { php-version: '8.3', coverage: none }
+      - run: composer install --prefer-dist --no-progress
+      - run: ./vendor/bin/pint --test
 
-      - name: Run Pint (code style check)
-        run: ./vendor/bin/pint --test
-
-      - name: Run Larastan
-        run: ./vendor/bin/phpstan analyse src --level=6
+  phpstan:
+    name: Static analysis (Larastan)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with: { php-version: '8.3', coverage: none }
+      - run: composer install --prefer-dist --no-progress
+      - run: ./vendor/bin/phpstan analyse src --level=6
