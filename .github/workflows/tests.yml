@@ -29,9 +29,10 @@ jobs:
 
       - name: Install dependencies
         run: |
+          rm -f composer.lock
           composer require "laravel/framework:${{ matrix.laravel }}" \
-            "orchestra/testbench:^8|^9|^10" --no-update
-          composer install --prefer-dist --no-progress
+            "orchestra/testbench:^8|^9|^10|^11" --no-update
+          composer update --prefer-dist --no-progress
 
       - name: Run tests
         run: ./vendor/bin/pest
