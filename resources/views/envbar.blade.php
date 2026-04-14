@@ -185,7 +185,7 @@
 
     function applyBodyOffset(show) {
         if (show) {
-            document.body.style['margin' + (position === 'bottom' ? 'Bottom' : 'Top')] = '32px';
+            document.body.style['margin' + (position === 'bottom' ? 'Bottom' : 'Top')] = '24px';
         } else {
             document.body.style['margin' + (position === 'bottom' ? 'Bottom' : 'Top')] = '';
         }
