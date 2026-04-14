@@ -1,4 +1,11 @@
-# Laravel EnvBar
+# Laravel Envbar
+
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/gillobis/laravel-envbar.svg?style=flat-square)](https://packagist.org/packages/gillobis/laravel-envbar)
+[![Total Downloads](https://img.shields.io/packagist/dt/gillobis/laravel-envbar.svg?style=flat-square)](https://packagist.org/packages/gillobis/laravel-envbar)
+[![Tests](https://img.shields.io/github/actions/workflow/status/gillobis/laravel-envbar/tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/gillobis/laravel-envbar/actions/workflows/tests.yml)
+[![PHP Version](https://img.shields.io/packagist/php-v/gillobis/laravel-envbar.svg?style=flat-square)](https://packagist.org/packages/gillobis/laravel-envbar)
+[![Laravel](https://img.shields.io/badge/Laravel-10%20|%2011%20|%2012-FF2D20?style=flat-square&logo=laravel&logoColor=white)](https://laravel.com)
+[![License](https://img.shields.io/github/license/gillobis/laravel-envbar.svg?style=flat-square)](LICENSE.md)
 
 A visual environment indicator bar for Laravel applications. Instantly see which environment you're working on — local, staging, testing, or production — with a fully configurable, zero-dependency toolbar injected into your HTML pages.
 

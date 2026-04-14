@@ -1,0 +1,11 @@
+# Every file → review of the main mantainer
+*                          @gillobis
+
+# The public config → mandatory review
+/config/                   @gillobis
+
+# CI workflows → extra attention
+/.github/workflows/        @gillobis
+
+# Blade views → anyone of the frontend team can approve
+/resources/views/          @gillobis
