@@ -24,8 +24,8 @@ A visual environment indicator bar for Laravel applications. Instantly see which
 
 ## Requirements
 
-- PHP 8.1+
-- Laravel 10, 11, 12, or 13
+- PHP 8.2+
+- Laravel 11, 12, or 13
 
 ## Installation
 
