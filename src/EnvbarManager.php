@@ -10,7 +10,6 @@ class EnvbarManager
      * checks config + gate + environment
      *
      * @throws BindingResolutionException
-     * @return bool
      */
     public function isEnabled(): bool
     {
@@ -25,7 +24,7 @@ class EnvbarManager
             return false;
         }
 
-        //check if it's production and if we allow in production
+        // check if it's production and if we allow in production
         if (app()->environment('production') && ! config('envbar.allow_in_production', false)) {
             return false;
         }
@@ -45,9 +44,9 @@ class EnvbarManager
     }
 
     /**
-     * 
      * @return array<string>
-     * @throws BindingResolutionException 
+     *
+     * @throws BindingResolutionException
      */
     public function getEnvironmentConfig(): array
     {
@@ -55,9 +54,9 @@ class EnvbarManager
     }
 
     /**
-     * 
      * @return array<mixed>
-     * @throws BindingResolutionException 
+     *
+     * @throws BindingResolutionException
      */
     public function getMetadata(): array
     {

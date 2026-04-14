@@ -87,15 +87,15 @@ it('shows the correct environment name', function () {
 
 it('shows the correct label for each configured environment', function (string $env, string $expectedLabel) {
     app()->detectEnvironment(fn () => $env);
-    config(["envbar.environments" => [$env]]);
+    config(['envbar.environments' => [$env]]);
 
     $response = $this->get('/');
     $response->assertSee($expectedLabel, false);
 })->with([
-    'local'       => ['local', 'LOCAL'],
+    'local' => ['local', 'LOCAL'],
     'development' => ['development', 'DEVELOPMENT'],
-    'staging'     => ['staging', 'STAGING'],
-    'testing'     => ['testing', 'TESTING'],
+    'staging' => ['staging', 'STAGING'],
+    'testing' => ['testing', 'TESTING'],
 ]);
 
 it('applies the correct background color from config', function () {
@@ -161,35 +161,35 @@ it('shows the PHP version when enabled', function () {
     config(['envbar.show.php_version' => true]);
 
     $response = $this->get('/');
-    $response->assertSee('PHP ' . phpversion(), false);
+    $response->assertSee('PHP '.phpversion(), false);
 });
 
 it('hides the PHP version when disabled', function () {
     config(['envbar.show.php_version' => false]);
 
     $response = $this->get('/');
-    $response->assertDontSee('PHP ' . phpversion(), false);
+    $response->assertDontSee('PHP '.phpversion(), false);
 });
 
 it('shows the Laravel version when enabled', function () {
     config(['envbar.show.laravel_version' => true]);
 
     $response = $this->get('/');
-    $response->assertSee('Laravel ' . app()->version(), false);
+    $response->assertSee('Laravel '.app()->version(), false);
 });
 
 it('hides the Laravel version when disabled', function () {
     config(['envbar.show.laravel_version' => false]);
 
     $response = $this->get('/');
-    $response->assertDontSee('Laravel ' . app()->version(), false);
+    $response->assertDontSee('Laravel '.app()->version(), false);
 });
 
 it('shows the hostname when enabled', function () {
     config(['envbar.show.hostname' => true]);
 
     $response = $this->get('/');
-    $response->assertSee('host: ' . gethostname(), false);
+    $response->assertSee('host: '.gethostname(), false);
 });
 
 it('hides the hostname when disabled', function () {
@@ -234,7 +234,7 @@ it('renders switcher links when enabled', function () {
     config([
         'envbar.switcher.enabled' => true,
         'envbar.switcher.environments' => [
-            'local'   => 'http://myapp.test',
+            'local' => 'http://myapp.test',
             'production' => 'https://myapp.com',
         ],
     ]);
@@ -249,7 +249,7 @@ it('does not render a switcher link for the current environment', function () {
         'envbar.switcher.enabled' => true,
         'envbar.switcher.environments' => [
             'staging' => 'https://staging.myapp.com',
-            'local'   => 'http://myapp.test',
+            'local' => 'http://myapp.test',
         ],
     ]);
 

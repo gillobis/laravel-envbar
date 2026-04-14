@@ -26,6 +26,13 @@
             "aliases": { "Envbar": "Gillobis\\Envbar\\Facades\\Envbar" }
         }
     },
+    "scripts": {
+        "ci" : [
+            "./vendor/bin/phpstan analyse src --level=6",
+            "./vendor/bin/pest --no-coverage",
+            "./vendor/bin/pint"
+        ]
+    },
     "config": {
         "allow-plugins": {
             "pestphp/pest-plugin": true
