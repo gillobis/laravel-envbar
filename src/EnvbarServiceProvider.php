@@ -21,12 +21,14 @@ class EnvbarServiceProvider extends ServiceProvider
     public function boot(): void
     {
         // Automatically register the middleware on the 'web' group
-        $this->app['router']->pushMiddlewareToGroup('web', InjectEnvbar::class);
+        $this->app->booted(function () {
+            $this->app['router']->pushMiddlewareToGroup('web', InjectEnvbar::class);
+        });
 
         // Load views from the package (namespace 'envbar')
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'envbar');
 
-        // Make config and views publishable
+        // Rende pubblicabili config e viste
         if ($this->app->runningInConsole()) {
             $this->publishes([
                 __DIR__.'/../config/envbar.php' => config_path('envbar.php'),
