@@ -56,6 +56,13 @@ This creates `config/envbar.php` where you can customize all options.
 php artisan vendor:publish --tag=envbar-views
 ```
 
+### Set the environment variable to enable the bar
+In your `.env` file, enable the bar for your desired environments:
+
+```env
+ENVBAR_ENABLED=true
+```
+
 ## Configuration
 
 ### Basic options
@@ -68,7 +75,7 @@ return [
     'position'     => env('ENVBAR_POSITION', 'top'), // 'top' | 'bottom'
     'theme'        => env('ENVBAR_THEME', 'auto'),   // 'light' | 'dark' | 'auto'
     'collapsible'  => true,
-    'gate'         => null, // e.g. 'viewEnvBar'
+    'gate'         => null, // e.g. 'viewEnvbar'
 ];
 ```
 
@@ -154,12 +161,12 @@ To restrict visibility, define a Gate and reference it in the config:
 
 ```php
 // AppServiceProvider
-Gate::define('viewEnvBar', function (User $user) {
+Gate::define('viewEnvbar', function (User $user) {
     return $user->isAdmin();
 });
 
 // config/envbar.php
-'gate' => 'viewEnvBar',
+'gate' => 'viewEnvbar',
 ```
 
 ## Testing

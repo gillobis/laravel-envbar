@@ -75,6 +75,15 @@ it('does not inject the bar for AJAX requests', function () {
     $response->assertDontSee('id="envbar"', false);
 });
 
+it('injects the bar for Livewire requests', function () {
+    $response = $this->get('/', [
+        'X-Requested-With' => 'XMLHttpRequest',
+        'X-Livewire' => 'true',
+    ]);
+    $response->assertSuccessful();
+    $response->assertSee('id="envbar"', false);
+});
+
 // ---------------------------------------------------------------------------
 // Environment label & appearance
 // ---------------------------------------------------------------------------
