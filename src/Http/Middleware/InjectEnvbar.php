@@ -37,9 +37,9 @@ class InjectEnvbar
      */
     private function shouldInject(Request $request, Response $response): bool
     {
-        return str_contains($response->headers->get('Content-Type'), 'text/html')
+        return str_contains($response->headers->get('Content-Type', ''), 'text/html')
             && str_contains($response->getContent(), '</body>')
-            && ! $request->ajax()
+            && (! $request->ajax() || $request->hasHeader('X-Livewire'))
             && $this->manager->isEnabled();
     }
 }
