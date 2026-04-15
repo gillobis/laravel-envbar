@@ -69,16 +69,25 @@ class EnvbarManager
 
     public function getGitBranch(): ?string
     {
-        $result = shell_exec('git rev-parse --abbrev-ref HEAD 2>/dev/null');
+        $result = $this->execGit('git rev-parse --abbrev-ref HEAD');
 
         return $result !== null ? trim($result) : null;
     }
 
     public function getGitCommit(): ?string
     {
-        $result = shell_exec('git rev-parse HEAD 2>/dev/null');
+        $result = $this->execGit('git rev-parse HEAD');
 
         return $result !== null ? trim($result) : null;
+    }
+
+    private function execGit(string $command): ?string
+    {
+        $output = [];
+        $exitCode = 0;
+        exec($command . ' 2>&1', $output, $exitCode);
+
+        return $exitCode === 0 ? implode('\n', $output) : null;
     }
 
     public function render(): string

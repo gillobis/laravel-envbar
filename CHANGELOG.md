@@ -10,6 +10,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - add `envbar:status` Artisan command to display current status and metadata in console
 - add `envbar:check` Artisan command to check if Envbar can be displayed
 
+### Fixed
+- fix incorrect environment retrieval in certain edge cases (e.g. when running in a non-git environment or when certain server variables are missing)
+- fix potential issues with bar injection in non-standard HTML responses (e.g. when `<body>` tag is missing or when response content is not HTML)
+- fix potential issues with favicon overlay when original favicon is not found or when canvas is not supported 
+
 ## [0.1.2] - 2026-04-14
 
 ### Fixed
