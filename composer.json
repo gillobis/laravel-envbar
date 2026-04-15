@@ -27,6 +27,9 @@
         }
     },
     "scripts": {
+        "test": [
+            "./vendor/bin/pest"
+        ],
         "ci" : [
             "./vendor/bin/phpstan analyse src --level=6",
             "./vendor/bin/pest --no-coverage",
