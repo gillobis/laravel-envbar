@@ -22,7 +22,6 @@ class EnvbarCheck extends Command
 
     /**
      * Execute the console command.
-     * @return int
      */
     public function handle(): int
     {
@@ -32,19 +31,21 @@ class EnvbarCheck extends Command
 
         if (! $enabled) {
             $this->error('Envbar is disabled in the configuration.');
+
             return self::FAILURE;
         }
 
         if (! in_array($environment, $allowedEnvironments)) {
             $this->error("Current environment '{$environment}' is not in the allowed environments list.");
+
             return self::FAILURE;
         }
 
-        if( in_array('production', $allowedEnvironments)  ) {
-            if (!config('envbar.show.production', false)) {
+        if (in_array('production', $allowedEnvironments)) {
+            if (! config('envbar.show.production', false)) {
                 $this->warn("Envbar is allowed in production environment, but 'envbar.show.production' config is not enabled.");
             } else {
-                $this->warn("Envbar is enabled in production environment. Make sure this is intentional and does not leak sensitive information.");
+                $this->warn('Envbar is enabled in production environment. Make sure this is intentional and does not leak sensitive information.');
             }
         }
 

@@ -29,10 +29,14 @@ class EnvbarStatus extends Command
         $environment = app()->environment();
         $metadata = config('envbar.environments_config.'.$environment, []);
         $environments = config('envbar.environments', []);
+        $dataDisplayed = config('envbar.show', []);
+        $dataDisplayed = array_filter($dataDisplayed, fn ($value) => $value === true);
+        $dataDisplayed = array_keys($dataDisplayed);
 
         $this->info("Envbar is {$enabled}");
         $this->info("Current environment: {$environment}");
         $this->info('Metadata: '.json_encode($metadata, JSON_PRETTY_PRINT));
         $this->info('Allowed environments: '.implode(', ', $environments));
+        $this->info('Data displayed: '.json_encode($dataDisplayed, JSON_PRETTY_PRINT));
     }
 }
