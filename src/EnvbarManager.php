@@ -85,7 +85,7 @@ class EnvbarManager
     {
         $output = [];
         $exitCode = 0;
-        exec($command . ' 2>&1', $output, $exitCode);
+        exec($command.' 2>&1', $output, $exitCode);
 
         return $exitCode === 0 ? implode('\n', $output) : null;
     }
