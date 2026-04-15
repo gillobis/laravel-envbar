@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 - add `envbar:status` Artisan command to display current status and metadata in console
+- add `envbar:check` Artisan command to check if Envbar can be displayed
 
 ## [0.1.2] - 2026-04-14
 

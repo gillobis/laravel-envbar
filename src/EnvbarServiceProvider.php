@@ -2,6 +2,7 @@
 
 namespace Gillobis\Envbar;
 
+use Gillobis\Envbar\Commands\EnvbarCheck;
 use Gillobis\Envbar\Commands\EnvbarStatus;
 use Gillobis\Envbar\Http\Middleware\InjectEnvbar;
 use Illuminate\Support\ServiceProvider;
@@ -47,7 +48,7 @@ class EnvbarServiceProvider extends ServiceProvider
             // Register the artisan command
             $this->commands([
                 EnvbarStatus::class,
-                // NetworkCommand::class,
+                EnvbarCheck::class,
             ]);
         }
     }
