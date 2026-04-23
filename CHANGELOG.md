@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Added 
+- add preview image to README
+- add custom data prider functionality to allow users to define their own custom info segments with arbitrary data (e.g. from config or via callback)
+
 ## [0.2.0] - 2026-04-15
 
 ### Added

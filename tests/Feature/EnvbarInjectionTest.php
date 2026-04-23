@@ -1,6 +1,8 @@
 <?php
 
+use Gillobis\Envbar\EnvbarManager;
 use Gillobis\Envbar\Http\Middleware\InjectEnvbar;
+use Gillobis\Envbar\Interfaces\EnvbarDataProvider;
 use Illuminate\Support\Facades\Route;
 
 beforeEach(function () {
@@ -299,4 +301,120 @@ it('contains inline styles and script', function () {
     expect($content)->toContain('<script>');
     expect($content)->not->toContain('<link rel="stylesheet"');
     expect($content)->not->toContain('<script src=');
+});
+
+// ---------------------------------------------------------------------------
+// Custom data providers
+// ---------------------------------------------------------------------------
+
+it('renders a custom data provider in the bar', function () {
+    $provider = new class implements EnvbarDataProvider
+    {
+        public function label(): string
+        {
+            return 'Version';
+        }
+
+        public function value(): string|array
+        {
+            return '2.5.0';
+        }
+
+        public function icon(): ?string
+        {
+            return '🚀';
+        }
+    };
+
+    app()->bind('test-version-provider', fn () => $provider);
+    config(['envbar.providers' => ['test-version-provider']]);
+
+    $response = $this->get('/');
+    $response->assertSuccessful();
+    $response->assertSee('Version: 2.5.0', false);
+    $response->assertSee('🚀', false);
+});
+
+it('renders a custom data provider without icon', function () {
+    $provider = new class implements EnvbarDataProvider
+    {
+        public function label(): string
+        {
+            return 'Build';
+        }
+
+        public function value(): string|array
+        {
+            return '42';
+        }
+
+        public function icon(): ?string
+        {
+            return null;
+        }
+    };
+
+    app()->bind('test-build-provider', fn () => $provider);
+    config(['envbar.providers' => ['test-build-provider']]);
+
+    $response = $this->get('/');
+    $response->assertSuccessful();
+    $response->assertSee('Build: 42', false);
+});
+
+it('renders a custom data provider with array value joined by comma', function () {
+    $provider = new class implements EnvbarDataProvider
+    {
+        public function label(): string
+        {
+            return 'Tags';
+        }
+
+        public function value(): string|array
+        {
+            return ['alpha', 'beta'];
+        }
+
+        public function icon(): ?string
+        {
+            return null;
+        }
+    };
+
+    app()->bind('test-tags-provider', fn () => $provider);
+    config(['envbar.providers' => ['test-tags-provider']]);
+
+    $response = $this->get('/');
+    $response->assertSuccessful();
+    $response->assertSee('Tags: alpha, beta', false);
+});
+
+it('renders a programmatically registered provider', function () {
+    $provider = new class implements EnvbarDataProvider
+    {
+        public function label(): string
+        {
+            return 'Deploy';
+        }
+
+        public function value(): string|array
+        {
+            return 'canary';
+        }
+
+        public function icon(): ?string
+        {
+            return '🐤';
+        }
+    };
+
+    app()->bind('test-deploy-provider', fn () => $provider);
+
+    $manager = app(EnvbarManager::class);
+    $manager->registerProvider('test-deploy-provider');
+
+    $response = $this->get('/');
+    $response->assertSuccessful();
+    $response->assertSee('Deploy: canary', false);
+    $response->assertSee('🐤', false);
 });
