@@ -2,10 +2,49 @@
 
 namespace Gillobis\Envbar;
 
+use Gillobis\Envbar\Interfaces\EnvbarDataProvider;
 use Illuminate\Contracts\Container\BindingResolutionException;
 
 class EnvbarManager
 {
+    /** @var array<int, class-string<EnvbarDataProvider>> */
+    protected array $providers = [];
+
+    /**
+     * @param  class-string<EnvbarDataProvider>  $providerClass
+     */
+    public function registerProvider(string $providerClass): void
+    {
+        $this->providers[] = $providerClass;
+    }
+
+    /**
+     * @return array<int, EnvbarDataProvider>
+     */
+    public function resolveProviders(): array
+    {
+        $classes = array_merge(
+            config('envbar.providers', []),
+            $this->providers,
+        );
+
+        $resolved = [];
+
+        foreach ($classes as $class) {
+            try {
+                $instance = app()->make($class);
+            } catch (\Throwable) {
+                continue;
+            }
+
+            if ($instance instanceof EnvbarDataProvider) {
+                $resolved[] = $instance;
+            }
+        }
+
+        return $resolved;
+    }
+
     /**
      * checks config + gate + environment
      *
@@ -98,6 +137,7 @@ class EnvbarManager
             'environment' => $this->getCurrentEnvironment(),
             'config' => $this->getEnvironmentConfig(),
             'metadata' => $this->getMetadata(),
+            'providers' => $this->resolveProviders(),
         ])->render();
     }
 }

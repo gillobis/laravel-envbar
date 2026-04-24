@@ -44,6 +44,15 @@
     if (!empty($show['timestamp'])) {
         $segments[] = '<span class="envbar-item">' . e(now()->format('H:i:s')) . '</span>';
     }
+
+    // Custom data providers
+    foreach ($providers ?? [] as $provider) {
+        $providerIcon = $provider->icon();
+        $providerValue = $provider->value();
+        $displayValue = is_array($providerValue) ? implode(', ', $providerValue) : $providerValue;
+        $iconHtml = $providerIcon ? e($providerIcon) . ' ' : '';
+        $segments[] = '<span class="envbar-item">' . $iconHtml . e($provider->label()) . ': ' . e($displayValue) . '</span>';
+    }
 @endphp
 
 <style>

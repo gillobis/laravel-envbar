@@ -10,9 +10,7 @@
 A visual environment indicator bar for Laravel applications. Instantly see which environment you're working on — local, staging, testing, or production — with a fully configurable, zero-dependency toolbar injected into your HTML pages.
 
 ```
-┌───────────────────────────────────────────────────────────────────┐
-│ ⚠️  STAGING  │ MyApp │ PHP 8.3 │ Laravel 11 │ branch: develop │ ─ │
-└───────────────────────────────────────────────────────────────────┘
+![Preview](image.png)
 ```
 
 ## Features
