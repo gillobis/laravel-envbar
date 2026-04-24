@@ -9,9 +9,8 @@
 
 A visual environment indicator bar for Laravel applications. Instantly see which environment you're working on — local, staging, testing, or production — with a fully configurable, zero-dependency toolbar injected into your HTML pages.
 
-```
 ![Preview](image.png)
-```
+
 
 ## Features
 
